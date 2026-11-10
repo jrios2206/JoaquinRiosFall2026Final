@@ -1,8 +1,9 @@
-
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class FlockManager : MonoBehaviour
 {
+    public CinemachineCamera cam;
     public ChickenScript[] flock;
     public int selectedIndex = 0;
     public FoxScript fox;
@@ -14,12 +15,14 @@ public class FlockManager : MonoBehaviour
     void Start()
     {
         neededTowin = Mathf.CeilToInt(flock.Length * 0.8f);
+        cam.Follow = flock[selectedIndex].transform;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.W))
         {
             flock[selectedIndex].Move(new Vector3(0, 0, 1));
@@ -58,7 +61,9 @@ public class FlockManager : MonoBehaviour
             {
                 selectedIndex = 0;
             }
+            cam.Follow = flock[selectedIndex].transform;
         }
+
 
 
     }
